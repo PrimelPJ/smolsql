@@ -1,0 +1,12 @@
+[
+  {"id":1,"name":"Alice Chen","age":29,"dept":"Engineering","salary":95000,"city":"Toronto"},
+  {"id":2,"name":"Bob Okafor","age":34,"dept":"Product","salary":110000,"city":"Vancouver"},
+  {"id":3,"name":"Priya Sharma","age":27,"dept":"Engineering","salary":88000,"city":"Calgary"},
+  {"id":4,"name":"James Wu","age":41,"dept":"Sales","salary":72000,"city":"Toronto"},
+  {"id":5,"name":"Sara Nielsen","age":31,"dept":"Engineering","salary":102000,"city":"Montreal"},
+  {"id":6,"name":"Carlos Rivera","age":26,"dept":"Product","salary":91000,"city":"Calgary"},
+  {"id":7,"name":"Fatima Al-Hassan","age":38,"dept":"Sales","salary":79000,"city":"Vancouver"},
+  {"id":8,"name":"Liam Park","age":24,"dept":"Engineering","salary":81000,"city":"Toronto"},
+  {"id":9,"name":"Nia Johnson","age":45,"dept":"Sales","salary":84000,"city":"Montreal"},
+  {"id":10,"name":"Ethan Nguyen","age":30,"dept":"Product","salary":99000,"city":"Calgary"}
+]

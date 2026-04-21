@@ -1,0 +1,17 @@
+{
+  "name": "smolsql",
+  "version": "1.0.0",
+  "description": "A SQL query engine built from scratch. Zero dependencies.",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "repl": "npm run build && node dist/repl.js ./data",
+    "query": "npm run build && node dist/index.js ./data",
+    "test": "npm run build && node dist/test.js"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "typescript": "^5.4.0"
+  }
+}
