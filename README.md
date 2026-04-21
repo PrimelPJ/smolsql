@@ -2,7 +2,7 @@
 
 A SQL query engine built from scratch in TypeScript. No dependencies. No parser libraries. No ORM magic.
 
-Just a hand-written lexer, a recursive-descent parser, a logical query planner, and a volcano-model execution engine — all in ~1,800 lines of code.
+Just a hand-written lexer, a recursive-descent parser, a logical query planner, and a volcano-model execution engine - all in ~1,800 lines of code.
 
 ```
 smolsql> SELECT dept, COUNT(*) as headcount, AVG(salary) as avg_salary
@@ -72,7 +72,7 @@ npm test
 
 ## Architecture
 
-The engine is split into two phases — **frontend** (parsing) and **backend** (execution) — separated by a logical plan tree. This mirrors how real databases like PostgreSQL and DuckDB are structured.
+The engine is split into two phases - **frontend** (parsing) and **backend** (execution) - separated by a logical plan tree. This mirrors how real databases like PostgreSQL and DuckDB are structured.
 
 ```
 SQL string
@@ -107,7 +107,7 @@ interface Token {
 
 ### Parser (`src/parser.ts`)
 
-A recursive-descent parser. One method per grammar production rule. The entire SQL grammar is encoded in the call graph — `parseSelect` calls `parseWhere`, which calls `parseOr`, which calls `parseAnd`, down to `parsePrimary` at the leaves.
+A recursive-descent parser. One method per grammar production rule. The entire SQL grammar is encoded in the call graph - `parseSelect` calls `parseWhere`, which calls `parseOr`, which calls `parseAnd`, down to `parsePrimary` at the leaves.
 
 The output is a discriminated union AST:
 
@@ -125,7 +125,7 @@ TypeScript's exhaustive union checks mean the compiler will catch any unhandled 
 
 ### Query planner (`src/planner.ts`)
 
-Walks the AST and produces a tree of logical operators. This is the stage most tutorials skip — it separates *what the user asked for* from *how to compute it*.
+Walks the AST and produces a tree of logical operators. This is the stage most tutorials skip - it separates *what the user asked for* from *how to compute it*.
 
 ```typescript
 type LogicalPlan =
@@ -149,7 +149,7 @@ interface Operator {
 }
 ```
 
-This means rows flow lazily through the pipeline. A `LIMIT 5` at the root will cause the executor to stop pulling after 5 rows — the `Scan` at the bottom never processes the rest of the table. This is the same model used in PostgreSQL, MySQL, and SQLite.
+This means rows flow lazily through the pipeline. A `LIMIT 5` at the root will cause the executor to stop pulling after 5 rows - the `Scan` at the bottom never processes the rest of the table. This is the same model used in PostgreSQL, MySQL, and SQLite.
 
 The expression evaluator (`evalExpr`) is a recursive function over `ASTNode` that handles arithmetic, comparisons, boolean logic, string functions, and aggregate accumulators.
 
@@ -200,7 +200,7 @@ smolsql> SELECT * FROM invoices WHERE amount > 1000;
 
 ## What I learned
 
-The volcano model was the real insight. A `SELECT` statement looks like instructions, but it's actually a declaration — it describes a result set, not a procedure. The planner's job is to build the cheapest procedure that produces that result. The executor's job is to run it one row at a time without loading everything into memory first. That's the entire intellectual core of every relational database ever built.
+The volcano model was the real insight. A `SELECT` statement looks like instructions, but it's actually a declaration - it describes a result set, not a procedure. The planner's job is to build the cheapest procedure that produces that result. The executor's job is to run it one row at a time without loading everything into memory first. That's the entire intellectual core of every relational database ever built.
 
 The second thing: operator composition is powerful. Once you have `Filter`, `Project`, `Sort`, and `Scan` as independent units, you can combine them into arbitrarily complex query plans without writing new code. The primitives do the work.
 
@@ -222,10 +222,10 @@ The second thing: operator composition is powerful. Once you have `Filter`, `Pro
 ```
 smolsql/
 ├── src/
-│   ├── lexer.ts       tokenizer — SQL string → Token[]
-│   ├── parser.ts      recursive-descent parser — Token[] → AST
-│   ├── planner.ts     logical planner — AST → LogicalPlan tree
-│   ├── executor.ts    volcano executor — LogicalPlan → Row[][]
+│   ├── lexer.ts       tokenizer - SQL string → Token[]
+│   ├── parser.ts      recursive-descent parser - Token[] → AST
+│   ├── planner.ts     logical planner - AST → LogicalPlan tree
+│   ├── executor.ts    volcano executor - LogicalPlan → Row[][]
 │   ├── index.ts       public API + CLI entry point
 │   ├── repl.ts        interactive REPL
 │   └── test.ts        test suite (20 cases)
@@ -240,6 +240,6 @@ smolsql/
 
 ## References
 
-- Graefe, G. (1994). *Volcano — An Extensible and Parallel Query Evaluation System.* IEEE TKDE.
+- Graefe, G. (1994). *Volcano - An Extensible and Parallel Query Evaluation System.* IEEE TKDE.
 - Ramakrishnan & Gehrke. *Database Management Systems.* (the textbook)
-- DuckDB internals blog series — modern take on the same ideas
+- DuckDB internals blog series - modern take on the same ideas
